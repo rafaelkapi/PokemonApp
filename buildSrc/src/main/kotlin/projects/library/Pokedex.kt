@@ -4,27 +4,22 @@ import projects.model.Module
 import projects.model.ModuleType
 import projects.model.ProjectInfo
 
-object TheMovie {
+object Pokedex {
     val projectInfo = ProjectInfo(
         name = Modules.ROOT,
         applicationId = "com.cactus.android.sample",
-        groupId = "com.cactus.commons",
-        scheme = "appthemovie",
+        groupId = "com.cactus.pokedex",
+        scheme = "appPokemon",
         
         modules = listOf(
             Module(
                 path = Modules.ROOT,
                 type = ModuleType.ANDROID_LIBRARY,
             ),
-            Module(
-                path = Modules.movie,
-                type = ModuleType.ANDROID_LIBRARY,
-            )
         )
     )
 
     object Modules {
-        const val ROOT = ":TheMovie"
-        val movie = ":movie"
+        const val ROOT = ":pokedex"
     }
 }

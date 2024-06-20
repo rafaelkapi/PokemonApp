@@ -1,5 +1,4 @@
 import helpers.applyCustomPluginsByModuleType
-
 subprojects {
     repositories {
         mavenLocal()
@@ -10,11 +9,11 @@ subprojects {
     }
 
     // Plugins Apps
-    this.applyCustomPluginsByModuleType(projects.app.PokemonApp.projectInfo)
+    this.applyCustomPluginsByModuleType(projects.app.PokedexApp.projectInfo)
 
     // Plugins Libraries
-//    this.applyCustomPluginsByModuleType(projects.library.TheMovie.projectInfo)
-//    this.applyCustomPluginsByModuleType(projects.library.Commons.projectInfo)
+    this.applyCustomPluginsByModuleType(projects.library.Pokedex.projectInfo)
+    this.applyCustomPluginsByModuleType(projects.library.Commons.projectInfo)
 
     plugins.withId("com.android.application") {
 
@@ -33,7 +32,7 @@ subprojects {
             }
             defaultConfig {
                 manifestPlaceholders["scheme_app"] = "pokemonapp"
-                versionCode = 0
+                versionCode = 1
                 versionName = "0.0.1"
             }
             buildTypes {

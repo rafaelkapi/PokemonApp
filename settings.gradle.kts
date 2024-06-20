@@ -8,4 +8,8 @@ pluginManagement {
 }
 include(
     ":app",
+    ":pokedex",
+    ":commons:network",
+    ":commons:base",
+    ":commons:extensions",
 )

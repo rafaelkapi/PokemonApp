@@ -5,7 +5,7 @@ import projects.model.Module
 import projects.model.ModuleType
 import projects.model.ProjectInfo
 
-object PokemonApp {
+object PokedexApp {
     val projectInfo = ProjectInfo(
         name = Modules.ROOT,
         applicationId = "com.cactus.pokemonApp",
