@@ -1,0 +1,14 @@
+[versions]
+xpAndroidSDKVersion = "1.7.2"
+
+[libraries]
+xpAuthentication = { module = "br.com.xpinc.library:xpauthentication", version.ref = "xpAndroidSDKVersion" }
+xpSharedPreferences = { module = "br.com.xpinc.library:xpsharedpreferences", version.ref = "xpAndroidSDKVersion" }
+xpToken = { module = "br.com.xpinc.library:xptoken", version.ref = "xpAndroidSDKVersion" }
+
+[bundles]
+all = [
+    "xpAuthentication",
+    "xpSharedPreferences",
+    "xpToken"
+]
