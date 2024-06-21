@@ -12,10 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.viewinterop.AndroidView
 import com.cactus.commons.base.BaseMvvmFragment
-import com.cactus.pokedex.ui.theme.PokemonAppTheme
+import com.cactus.commons.viewbinding.viewBinding
+import com.cactus.movie.databinding.FragmentLayoutBinding
 
 class PokedexFragment : BaseMvvmFragment() {
+
+    private val pokedexBinding by viewBinding(FragmentLayoutBinding::inflate)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -26,6 +30,11 @@ class PokedexFragment : BaseMvvmFragment() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
+                    AndroidView(factory = { context ->
+                        pokedexBinding.root
+                    })
+
                     Greeting("Android")
                 }
             }

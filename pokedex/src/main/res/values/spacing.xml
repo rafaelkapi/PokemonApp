@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_stack_lg" category="spacing-stack">48dp</dimen>
+    <dimen name="spacing_stack_md" category="spacing-stack">32dp</dimen>
+    <dimen name="spacing_stack_sm" category="spacing-stack">24dp</dimen>
+
+    <dimen name="spacing_stack_xs" category="spacing-stack">16dp</dimen>
+    <dimen name="spacing_stack_xxs" category="spacing-stack">8dp</dimen>
+    <dimen name="spacing_stack_xxxs" category="spacing-stack">4dp</dimen>
+
+    <dimen name="spacing_stack_xl" category="spacing-stack">64dp</dimen>
+    <dimen name="spacing_stack_xxl" category="spacing-stack">96dp</dimen>
+    <dimen name="spacing_stack_xxxl" category="spacing-stack">128dp</dimen>
+</resources>

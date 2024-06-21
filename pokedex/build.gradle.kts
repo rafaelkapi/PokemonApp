@@ -85,4 +85,8 @@ dependencies {
     implementation(libs.rxjava2.rxjava.adapter)
     implementation(libs.retrofit2.converter.moshi)
     implementation(libs.retrofit2.converter.gson)
+
+    // UI
+    implementation(libs.androidx.swipe.refresh.layout)
+    implementation(libs.shimmer)
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="font_size_ul" category="font-size">80sp</dimen>
+    <dimen name="font_size_lg" category="font-size">40sp</dimen>
+    <dimen name="font_size_md" category="font-size">32sp</dimen>
+    <dimen name="font_size_sm" category="font-size">24sp</dimen>
+
+    <dimen name="font_size_xl" category="font-size">48sp</dimen>
+    <dimen name="font_size_xxl" category="font-size">56sp</dimen>
+    <dimen name="font_size_xxxl" category="font-size">64sp</dimen>
+
+    <dimen name="font_size_xs" category="font-size">20sp</dimen>
+    <dimen name="font_size_xxs" category="font-size">16sp</dimen>
+    <dimen name="font_size_xxxs" category="font-size">14sp</dimen>
+
+    <dimen name="font_size_us" category="font-size">12sp</dimen>
+
+</resources>
