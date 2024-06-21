@@ -13,13 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cactus.commons.base.BaseMvvmFragment
+import com.cactus.commons.livedata.SafeObserver
 import com.cactus.commons.viewbinding.viewBinding
+import com.cactus.movie.R
 import com.cactus.movie.databinding.FragmentLayoutBinding
+import com.cactus.pokedex.presentation.adapter.PokemonAdapter
+import com.cactus.pokedex.presentation.model.PokemonType
+import com.cactus.pokedex.presentation.model.PokemonVo
 
 class PokedexFragment : BaseMvvmFragment() {
 
     private val pokedexBinding by viewBinding(FragmentLayoutBinding::inflate)
+
+    private val pokemonAdapter: PokemonAdapter by lazy { PokemonAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,11 +42,109 @@ class PokedexFragment : BaseMvvmFragment() {
                     AndroidView(factory = { context ->
                         pokedexBinding.root
                     })
+//                    Greeting("Android")
 
-                    Greeting("Android")
                 }
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupObservers()
+        setupRecyclerView()
+        pullToRefresh()
+        pokemonAdapter.setViewItems(
+            listOf(
+                PokemonVo(
+                    "#0025",
+                    "Pikachu",
+                    listOf(
+                        PokemonType(
+                            "Electric",
+                            R.drawable.ic_grass,
+                            324
+                        ),
+                    ),
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+                ),
+                PokemonVo(
+                    "#0001",
+                    "Bulbasaur",
+                    listOf(
+                        PokemonType(
+                            "Grass",
+                            R.drawable.ic_grass,
+                            324
+                        ),
+                        PokemonType(
+                            "Poisson",
+                            R.drawable.ic_grass,
+                            324
+                        )
+                    ),
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                ),
+                PokemonVo(
+                    "#0025",
+                    "Pikachu",
+                    listOf(
+                        PokemonType(
+                            "Electric",
+                            R.drawable.ic_grass,
+                            324
+                        ),
+                    ),
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+                ),
+                PokemonVo(
+                    "#0001",
+                    "Bulbasaur",
+                    listOf(
+                        PokemonType(
+                            "Grass",
+                            R.drawable.ic_grass,
+                            324
+                        ),
+                        PokemonType(
+                            "Poisson",
+                            R.drawable.ic_grass,
+                            324
+                        )
+                    ),
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                ),
+                PokemonVo(
+                    "#0025",
+                    "Pikachu",
+                    listOf(
+                        PokemonType(
+                            "Electric",
+                            R.drawable.ic_grass,
+                            324
+                        ),
+                    ),
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+                ),
+                PokemonVo(
+                    "#0001",
+                    "Bulbasaur",
+                    listOf(
+                        PokemonType(
+                            "Grass",
+                            R.drawable.ic_grass,
+                            324
+                        ),
+                        PokemonType(
+                            "Poisson",
+                            R.drawable.ic_grass,
+                            324
+                        )
+                    ),
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                ),
+            )
+        )
     }
 
     @Composable
@@ -59,4 +165,30 @@ class PokedexFragment : BaseMvvmFragment() {
             Greeting("Android")
         }
     }
+
+    private fun setupObservers() {
+//        viewModel.state.observe(viewLifecycleOwner, SafeObserver { vo -> handlerState(vo) })
+//
+//        viewModel.similarMovies.observe(
+//            viewLifecycleOwner,
+//            SafeObserver { vo -> populateViewSimilarMovies(vo) })
+    }
+
+    private fun setupRecyclerView() {
+        pokedexBinding.content.pokemonList.apply {
+            layoutManager = GridLayoutManager(requireActivity(), 2)
+            adapter = pokemonAdapter
+        }
+    }
+
+    private fun pullToRefresh() {
+        pokedexBinding.content.swipeRefreshLayout.apply {
+            setOnRefreshListener {
+//                viewModel.refresh()
+                isRefreshing = false
+
+            }
+        }
+    }
+
 }

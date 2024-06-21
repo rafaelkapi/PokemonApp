@@ -50,7 +50,7 @@
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/similarMovies"
+                    android:id="@+id/pokemonList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_stack_xs"

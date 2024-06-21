@@ -89,4 +89,7 @@ dependencies {
     // UI
     implementation(libs.androidx.swipe.refresh.layout)
     implementation(libs.shimmer)
+
+    // Picasso
+    implementation(libs.picasso)
 }
