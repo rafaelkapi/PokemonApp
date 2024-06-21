@@ -1,6 +1,6 @@
 [versions]
 
-activityKtxVersion = "1.2.0"
+activityKtxVersion = "1.9.0"
 androidTestVersion = "1.1.1"
 androidxAnnotationVersion = "1.2.0"
 androidxCardviewVersion = "1.0.0"
@@ -16,7 +16,7 @@ androidxViewModelLifecycleVersion = "2.2.0"
 androidxLifecycleLivedataCore = "2.2.0"
 androidxMultidexVersion = "2.0.1"
 androidxNavigationVersion = "2.3.5"
-androidxSupportVersion = "1.1.0"
+androidxSupportVersion = "1.4.1"
 androidxWorkmanagerVersion = "2.7.1"
 appCenterVersion = "1.4.0"
 appDynamicsVersion = "21.6.+"

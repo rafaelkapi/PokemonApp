@@ -30,7 +30,7 @@ dependencies {
 
     // Dagger
     implementation(libs.google.dagger.core)
-    implementation(libs.google.dagger.support)
+//    implementation(libs.google.dagger.support)
     implementation(libs.google.dagger.android)
     kapt(libs.google.dagger.compiler)
     kapt(libs.google.dagger.processor)

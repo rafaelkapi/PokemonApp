@@ -15,6 +15,8 @@ android {
 
 dependencies {
 
+    api(project(projects.library.Pokedex.Modules.pokedex))
+
     // Kotlin
     implementation(libs.kotlin.stdlib.jdk7)
     implementation(libs.kotlin.reflect)
@@ -74,4 +76,8 @@ dependencies {
     implementation(libs.rxjava2.rxjava.adapter)
     implementation(libs.retrofit2.converter.moshi)
     implementation(libs.retrofit2.converter.gson)
+
+    // Navigation
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
 }

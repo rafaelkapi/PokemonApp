@@ -43,7 +43,6 @@ dependencies {
     // Dagger
     implementation(libs.google.dagger.core)
     implementation(libs.google.dagger.android)
-    implementation(libs.google.dagger.support)
     kapt(libs.google.dagger.compiler)
     kapt(libs.google.dagger.processor)
 

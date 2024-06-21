@@ -1,6 +1,8 @@
 package com.cactus.pokemon.di
 
 import android.app.Application
+import com.cactus.network.CommonsSchedulersModule
+import com.cactus.pokedex.di.PokedexModuleBuilder
 import com.cactus.pokemon.CustomApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -12,6 +14,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     MainActivityBuilderModule::class,
+    PokedexModuleBuilder::class,
+    CommonsSchedulersModule::class,
     ])
 interface AppComponent : AndroidInjector<DaggerApplication> {
 
