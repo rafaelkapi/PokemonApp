@@ -12,42 +12,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cactus.commons.base.BaseMvvmFragment
-import com.cactus.commons.livedata.SafeObserver
 import com.cactus.commons.viewbinding.viewBinding
 import com.cactus.movie.R
 import com.cactus.movie.databinding.FragmentLayoutBinding
 import com.cactus.pokedex.presentation.adapter.PokemonAdapter
 import com.cactus.pokedex.presentation.model.PokemonType
 import com.cactus.pokedex.presentation.model.PokemonVo
+import com.cactus.pokedex.presentation.view.ContainerPokedex
 
 class PokedexFragment : BaseMvvmFragment() {
 
     private val pokedexBinding by viewBinding(FragmentLayoutBinding::inflate)
 
-    private val pokemonAdapter: PokemonAdapter by lazy { PokemonAdapter() }
+    private val pokemonAdapter: PokemonAdapter by lazy { PokemonAdapter{} }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
+    ) = ComposeView(requireContext()).apply {
             setContent {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize()
+
                 ) {
-
-                    AndroidView(factory = { context ->
-                        pokedexBinding.root
-                    })
+                    ContainerPokedex(pokedexBinding)
 //                    Greeting("Android")
-
                 }
             }
         }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

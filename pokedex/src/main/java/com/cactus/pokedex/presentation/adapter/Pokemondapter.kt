@@ -9,7 +9,8 @@ import com.cactus.movie.databinding.ItemPokemonBinding
 import com.cactus.pokedex.presentation.model.PokemonVo
 import com.squareup.picasso.Picasso
 
-class PokemonAdapter : RecyclerView.Adapter<DetailsViewHolder>() {
+class PokemonAdapter(private val onClickPokemon: (PokemonVo) -> Unit) :
+    RecyclerView.Adapter<DetailsViewHolder>() {
 
     private val differ: AsyncListDiffer<PokemonVo?> = AsyncListDiffer(this, DIFF_CALLBACK)
 
@@ -20,7 +21,7 @@ class PokemonAdapter : RecyclerView.Adapter<DetailsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemPokemonBinding.inflate(layoutInflater, parent, false)
-        return DetailsViewHolder(binding)
+        return DetailsViewHolder(binding) { onClickPokemon(it) }
     }
 
     override fun onBindViewHolder(holder: DetailsViewHolder, position: Int) {
@@ -52,21 +53,28 @@ class PokemonAdapter : RecyclerView.Adapter<DetailsViewHolder>() {
     }
 }
 
-class DetailsViewHolder(private val view: ItemPokemonBinding) :
-    RecyclerView.ViewHolder(view.root) {
+class DetailsViewHolder(
+    private val binding: ItemPokemonBinding,
+    private val onClickPokemon: (PokemonVo) -> Unit
+) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(movie: PokemonVo) {
+    fun bind(vo: PokemonVo) {
 
-        with(view) {
-            Picasso.get().load(movie.posterUrl).into(view.poster)
-            name.text = movie.name
-            id.text = movie.id
-            movie.types.forEachIndexed { index, pokemonType ->
+        with(binding) {
+            cardView.setOnClickListener {
+                onClickPokemon(vo)
+            }
+            Picasso.get().load(vo.posterUrl).into(binding.poster)
+            name.text = vo.name
+            id.text = vo.id
+            vo.types.forEachIndexed { index, pokemonType ->
                 when (index) {
                     0 -> {
                         type1.visibility = android.view.View.VISIBLE
                         type1.text = pokemonType.type
                     }
+
                     1 -> {
                         type2.visibility = android.view.View.VISIBLE
                         type2.text = pokemonType.type
