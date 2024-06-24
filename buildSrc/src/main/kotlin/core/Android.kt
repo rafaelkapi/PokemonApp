@@ -4,9 +4,6 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
-import org.jetbrains.kotlin.gradle.internal.CacheImplementation
 import projects.model.ProjectInfo
 
 /**

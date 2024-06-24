@@ -1,11 +1,12 @@
 package com.cactus.pokedex.presentation.view
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.calculateTargetValue
-import androidx.compose.animation.rememberSplineBasedDecay
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.AnchoredDraggableState
+import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.draggable
-import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.DrawerValue
@@ -18,11 +19,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.cactus.movie.databinding.FragmentLayoutBinding
 import com.google.android.material.math.MathUtils.lerp
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ContainerPokedex(pokedexListView: FragmentLayoutBinding) {
     val scope = rememberCoroutineScope()
@@ -33,18 +37,25 @@ fun ContainerPokedex(pokedexListView: FragmentLayoutBinding) {
     }
 
     val translationX = remember { Animatable(0f) }.also {
-        it.updateBounds(0f, drawerWidth)
+        it.updateBounds(drawerWidth * 0.2f, drawerWidth)
     }
 
-    val draggableState = rememberDraggableState(onDelta = { dragAmount ->
-        scope.launch {
-            translationX.snapTo(translationX.value + dragAmount)
-        }
-    })
-
-    val decay = rememberSplineBasedDecay<Float>()
-
-//    val anchor = DraggableAnchors {}
+    val density = LocalDensity.current
+    val state = remember {
+        AnchoredDraggableState(
+            initialValue = DrawerValue.Closed,
+            positionalThreshold = {distance: Float -> distance * 0.5f},
+            animationSpec = tween(),
+            velocityThreshold = { with(density) {100.dp.toPx()} }
+        )
+    }.apply {
+        updateAnchors(
+            DraggableAnchors {
+                DrawerValue.Open at drawerWidth * 0.7f
+                DrawerValue.Closed at 0f
+            }
+        )
+    }
 
     Box(
         modifier = Modifier
@@ -56,40 +67,16 @@ fun ContainerPokedex(pokedexListView: FragmentLayoutBinding) {
         AndroidView(factory = { pokedexListView.root },
             modifier = Modifier
                 .graphicsLayer {
-                    this.translationX = translationX.value
-                    val scale = lerp(1f, 0.8f, translationX.value / drawerWidth)
-                    this.scaleX = scale
-                    this.scaleY = scale
-                }
-                .draggable(
-                    state = draggableState,
-                    orientation = Orientation.Horizontal,
-                    onDragStopped = { velocity ->
-                        val decayX = decay.calculateTargetValue(
-                            translationX.value,
-                            velocity,
-                        )
-                        scope.launch {
-                            val targetX = if (decayX > drawerWidth * 0.5) drawerWidth
-                            else 0f
-
-                            val canReachTargetWithDecay =
-                                (decayX > targetX && targetX == drawerWidth)
-                                        || (decayX < targetX && targetX == 0f)
-
-                            if (canReachTargetWithDecay) {
-                                translationX.animateDecay(
-                                    initialVelocity = velocity,
-                                    animationSpec = decay
-                                )
-                            } else {
-                                translationX.animateTo(targetX, initialVelocity = velocity)
-                            }
-                            drawerState = if (targetX == drawerWidth) DrawerValue.Open
-                            else DrawerValue.Closed
-                        }
+                    val offset = state.offset
+                    if (offset >= 0f) {
+                        this.translationX = offset
+                        val scale = lerp(1f, 0.8f,  offset / drawerWidth)
+                        this.scaleX = scale
+                        this.scaleY = scale
                     }
-                )
+                }
+                .anchoredDraggable(state,Orientation.Horizontal)
+
         )
     }
 
