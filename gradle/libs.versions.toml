@@ -29,6 +29,7 @@ cameraViewVersion = "1.0.0-alpha32"
 camera2Version = "1.0.2"
 chuckerVersion = "3.5.2"
 chuckVersion = "1.1.0"
+coilComposeVersion = "2.6.0"
 coroutinesVersion = "1.5.2"
 crashlyticsVersion = "2.3.0"
 credentialsVersion = "0.0.1"
@@ -210,6 +211,7 @@ app-dynamics-gradle = { module = "com.appdynamics:appdynamics-gradle-plugin", ve
 apps-flyer = { module = "com.appsflyer:af-android-sdk", version.ref = "appsFlyerVersion" }
 appsamurai-storyly = { module = "com.appsamurai.storyly:storyly", version.ref = "storylyVersion" }
 auth0 = { module = "com.auth0.android:auth0", version.ref = "auth0Version" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
 fasterxml-jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jacksonVersion" }
 fasterxml-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonVersion" }
 google-ads = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "googleAdsVersion" }

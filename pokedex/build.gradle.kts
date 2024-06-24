@@ -104,4 +104,7 @@ dependencies {
 
     // Picasso
     implementation(libs.picasso)
+
+    // Coil
+    implementation(libs.coil.compose)
 }
