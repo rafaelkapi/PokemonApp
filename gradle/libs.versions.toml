@@ -141,6 +141,7 @@ testRunnerVersion = "1.4.0"
 tickerVersion = "2.0.1"
 turbineVersion = "0.7.0"
 uiAutomatorVersion = "2.2.0"
+uiVersion = "1.6.8"
 viewBindingVersion = "7.0.1"
 viewModelVersion = "2.0.0"
 youtubeVersion = "10.0.4"
@@ -322,7 +323,7 @@ jetbrains-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotli
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityComposeVersion" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBomVersion" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiVersion"}
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }

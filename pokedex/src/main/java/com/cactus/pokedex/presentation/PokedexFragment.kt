@@ -215,10 +215,8 @@ class PokedexFragment : BaseMvvmFragment() {
                 val listPokemonsState = remember { mutableStateOf(listPokemons) }
                 Surface(
                     modifier = Modifier.fillMaxSize()
-
                 ) {
                     ContainerPokedex(pokedexBinding, listPokemonsState)
-//                    Greeting("Android")
                 }
             }
         }
