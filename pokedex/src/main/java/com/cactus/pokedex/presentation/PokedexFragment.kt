@@ -23,6 +23,7 @@ import com.cactus.pokedex.presentation.adapter.PokemonAdapter
 import com.cactus.pokedex.presentation.model.PokemonType
 import com.cactus.pokedex.presentation.model.PokemonVo
 import com.cactus.pokedex.presentation.view.ContainerPokedex
+import com.cactus.pokedex.presentation.view.PokemonDetail
 
 class PokedexFragment : BaseMvvmFragment() {
 
@@ -216,6 +217,7 @@ class PokedexFragment : BaseMvvmFragment() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    PokemonDetail(listPokemonsState.value[0])
                     ContainerPokedex(pokedexBinding, listPokemonsState)
                 }
             }

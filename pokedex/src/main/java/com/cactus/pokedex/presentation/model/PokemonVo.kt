@@ -1,7 +1,5 @@
 package com.cactus.pokedex.presentation.model
 
-import android.graphics.drawable.Drawable
-
 data class PokemonVo(
     val id: String,
     val name: String,

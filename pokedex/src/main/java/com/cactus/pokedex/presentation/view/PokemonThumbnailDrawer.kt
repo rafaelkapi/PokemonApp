@@ -40,6 +40,8 @@ import coil.compose.AsyncImage
 import com.cactus.movie.R
 import com.cactus.pokedex.presentation.model.PokemonType
 import com.cactus.pokedex.presentation.model.PokemonVo
+import com.cactus.pokedex.ui.theme.ColorAccent
+import com.cactus.pokedex.ui.theme.PrimaryColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -49,17 +51,19 @@ fun PokemonThumbnailDrawer(
     state: AnchoredDraggableState<DrawerValue>
 ) {
     var drawerWidth by remember { mutableFloatStateOf(1f) }
-    val maxOffsetX = drawerWidth * 0.55f
+    val alphaPokemon = drawerWidth * 0.65f
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+    val paddingStartList = 30.dp
+    val widthPokemonItem = 110.dp
 
     val gradientTop = Brush.verticalGradient(
-        colors = listOf(Color(0xFF646568), Color.Transparent),
+        colors = listOf(Color(ColorAccent.value), Color.Transparent),
         startY = 10f,
         endY = 100f
     )
 
     val gradientBottom = Brush.verticalGradient(
-        colors = listOf(Color(0xFF646568), Color.Transparent),
+        colors = listOf(Color(ColorAccent.value), Color.Transparent),
         startY = 1700f,
         endY = 1500f
     )
@@ -73,46 +77,41 @@ fun PokemonThumbnailDrawer(
             }
         ) {
             Canvas(
-                modifier = Modifier
+                modifier = Modifier.width(paddingStartList)
             ) {
                 drawRoundRect(
-                    color = Color(0xFF646568),
+                    color = Color(ColorAccent.value),
                     topLeft = Offset(0f, 0f),
-                    size = Size(200f, 900f),
+                    size = Size(160f, 400f),
                     cornerRadius = CornerRadius(100.dp.toPx(), 90.dp.toPx())
                 )
                 drawRoundRect(
-                    color = Color(0xFF646568),
+                    color = Color(ColorAccent.value),
                     topLeft = Offset(20f, 30f),
-                    size = Size(100f, 2380f),
+                    size = Size(50f, 2380f),
                     cornerRadius = CornerRadius(100.dp.toPx(), 300.dp.toPx())
                 )
                 drawRect(
-                    color = Color(0xFFE7E7E7),
-                    topLeft = Offset(120f, 0f),
+                    color = Color(PrimaryColor.value),
+                    topLeft = Offset(70f, 0f),
                     size = Size(1000f, 2380f)
                 )
             }
             LazyColumn(
                 modifier = Modifier
-                    .width(70.dp)
+                    .width(widthPokemonItem)
                     .height((screenHeight * .8f) - positionTop.dp)
-                    .offset(70.dp)
-
             )
             {
                 items(listPokemons.value) { pokemon ->
-                    Box(
-                        modifier = Modifier
-                            .padding(top = 40.dp)
-                    ) {
+                    Box {
                         Image(
                             painter = painterResource(id = R.drawable.ic_pokebol),
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .scale(1.7f),
-                            colorFilter = ColorFilter.tint(Color.White)
+                                .alpha(.1f),
+                            colorFilter = ColorFilter.tint(Color(ColorAccent.value))
                         )
 
                         AsyncImage(
@@ -120,8 +119,9 @@ fun PokemonThumbnailDrawer(
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
-                                .alpha(alphaThumbnails(state.offset, maxOffsetX))
-                                .fillMaxSize(),
+                                .alpha(alphaThumbnails(state.offset, alphaPokemon))
+                                .fillMaxSize()
+                                .scale(.6f),
                         )
                     }
                 }
@@ -131,15 +131,15 @@ fun PokemonThumbnailDrawer(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .alpha(alphaThumbnails(state.offset, maxOffsetX))
-                .offset(x = 37.dp)
+                .alpha(alphaThumbnails(state.offset, alphaPokemon))
+                .offset(x = 25.dp)
                 .background(gradientTop)
         )
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .alpha(alphaThumbnails(state.offset, maxOffsetX))
-                .offset(x = 37.dp)
+                .alpha(alphaThumbnails(state.offset, alphaPokemon))
+                .offset(x = 25.dp)
                 .background(gradientBottom)
         )
     }
@@ -337,13 +337,13 @@ fun PreviewPokemonThumbnailDrawer() {
     )
 
     val gradientTop = Brush.verticalGradient(
-        colors = listOf(Color(0xFF646568), Color.Transparent),
+        colors = listOf(Color(ColorAccent.value), Color.Transparent),
         startY = 10f,
         endY = 100f
     )
 
     val gradientBottom = Brush.verticalGradient(
-        colors = listOf(Color(0xFF646568), Color.Transparent),
+        colors = listOf(Color(ColorAccent.value), Color.Transparent),
         startY = 1700f,
         endY = 1500f
     )
@@ -356,31 +356,30 @@ fun PreviewPokemonThumbnailDrawer() {
             }
         ) {
             Canvas(
-                modifier = Modifier
+                modifier = Modifier.width(32.dp)
             ) {
                 drawRoundRect(
-                    color = Color(0xFF646568),
+                    color = Color(ColorAccent.value),
                     topLeft = Offset(0f, 0f),
-                    size = Size(200f, 900f),
+                    size = Size(160f, 400f),
                     cornerRadius = CornerRadius(100.dp.toPx(), 90.dp.toPx())
                 )
                 drawRoundRect(
-                    color = Color(0xFF646568),
+                    color = Color(ColorAccent.value),
                     topLeft = Offset(20f, 30f),
-                    size = Size(100f, 2380f),
+                    size = Size(50f, 2380f),
                     cornerRadius = CornerRadius(100.dp.toPx(), 300.dp.toPx())
                 )
                 drawRect(
                     color = Color(0xFFE7E7E7),
-                    topLeft = Offset(120f, 0f),
+                    topLeft = Offset(70f, 0f),
                     size = Size(1000f, 2380f)
                 )
             }
             LazyColumn(
                 modifier = Modifier
-                    .width(70.dp)
+                    .width(100.dp)
                     .height((screenHeight * .8f) - positionTop.dp)
-                    .offset(65.dp)
             )
             {
                 items(listPokemons) { pokemon ->
@@ -392,8 +391,7 @@ fun PreviewPokemonThumbnailDrawer() {
                             painter = painterResource(id = R.drawable.ic_pokebol),
                             contentDescription = null,
                             modifier = Modifier
-                                .fillMaxSize()
-                                .scale(1.7f),
+                                .fillMaxSize(),
                             colorFilter = ColorFilter.tint(Color.White)
                         )
 
@@ -401,7 +399,8 @@ fun PreviewPokemonThumbnailDrawer() {
                             model = pokemon.posterUrl,
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier.fillMaxSize()
+                                .scale(.5f),
                         )
                     }
                 }
@@ -411,14 +410,14 @@ fun PreviewPokemonThumbnailDrawer() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .offset(x = 37.dp)
+                .offset(x = 25.dp)
                 .background(gradientTop)
         )
 
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .offset(x = 37.dp)
+                .offset(x = 25.dp)
                 .background(gradientBottom)
 
         )

@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.cactus.movie.databinding.FragmentLayoutBinding
 import com.cactus.pokedex.presentation.model.PokemonVo
+import com.cactus.pokedex.ui.theme.PrimaryColor
 import com.google.android.material.math.MathUtils.lerp
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -39,7 +40,7 @@ fun ContainerPokedex(
 ) {
     var drawerWidth by remember { mutableFloatStateOf(1f) }
     var positionTop by remember { mutableFloatStateOf(1f) }
-    val maxOffsetX = drawerWidth * 0.55f
+    val maxOffsetX = drawerWidth * 0.62f
 
     val density = LocalDensity.current
     val state = remember {
@@ -63,13 +64,13 @@ fun ContainerPokedex(
             .fillMaxSize()
             .onGloballyPositioned { coordinates ->
                 drawerWidth = coordinates.size.width.toFloat()
-                positionTop = coordinates.positionInRoot().x
+                positionTop = coordinates.positionInRoot().y
             }
             .graphicsLayer {
                 val offset = state.offset
                 if (offset >= 0f) {
                     this.translationX = offset
-                    this.translationY = offset * 1.2f
+                    this.translationY = offset * 1.4f
                     val scale = lerp(1f, 0.8f, offset / drawerWidth)
                     this.scaleX = scale
                     this.scaleY = scale
@@ -97,7 +98,7 @@ fun ContainerPokedex(
                     .graphicsLayer {
                         this.translationX = state.offset * 0.8f
                     }
-                    .background(Color(0xFFE7E7E7))
+                    .background(Color(PrimaryColor.value))
                     .alpha(alphaPokemonList(state.offset, drawerWidth))
             )
         }
