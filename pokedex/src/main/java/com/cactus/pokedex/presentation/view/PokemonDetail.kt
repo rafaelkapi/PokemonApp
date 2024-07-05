@@ -2,7 +2,6 @@ package com.cactus.pokedex.presentation.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
@@ -17,11 +16,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.cactus.movie.R
 import com.cactus.pokedex.presentation.model.PokemonDetailVo
+import com.cactus.pokedex.presentation.model.PokemonSpecVo
 import com.cactus.pokedex.presentation.model.PokemonStatsVo
 import com.cactus.pokedex.presentation.view.widgets.PokemonEvolution
 import com.cactus.pokedex.presentation.view.widgets.PokemonImage
+import com.cactus.pokedex.presentation.view.widgets.PokemonSpec
 import com.cactus.pokedex.presentation.view.widgets.PokemonStats
 
 @Composable
@@ -29,8 +31,12 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
     val offsetYGeometricBackground = -80.dp
     val offsetXGeometricBackground = -30.dp
 
-    ConstraintLayout(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.navigationBars)) {
-        val (pokemonImage, pokemonEvolution, pokemonStats) = createRefs()
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.navigationBars)
+    ) {
+        val (pokemonImage, pokemonEvolution, pokemonSpec, pokemonStats) = createRefs()
 
         PokemonImage(
             Modifier.constrainAs(pokemonImage) {
@@ -38,7 +44,9 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             },
-            detailVo.posterUrl
+            "${detailVo.name}  #${detailVo.id}",
+            detailVo.posterUrl,
+            detailVo.drawableBackground
         )
 
         Image(
@@ -62,6 +70,19 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
             detailVo.evolutionsThumbnails,
         )
 
+        PokemonSpec(
+            Modifier
+                .fillMaxWidth(0.7f)
+                .padding(start = 4.dp, bottom = 4.dp, end = 4.dp, top = 8.dp)
+                .constrainAs(pokemonSpec) {
+                    top.linkTo(pokemonEvolution.bottom)
+                    bottom.linkTo(pokemonStats.top)
+                    start.linkTo(parent.start)
+                    height = Dimension.fillToConstraints
+                },
+            detailVo.spec,
+        )
+
         PokemonStats(
             Modifier
                 .fillMaxWidth(0.7f)
@@ -74,7 +95,6 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
@@ -89,16 +109,36 @@ fun PokemonDetailPreview() {
         speed = "Speed" to 0.5f
     )
 
+    val spec = PokemonSpecVo(
+        height = "0.4m",
+        weight = "6.0kg",
+        category = "Seed",
+        type = listOf(
+            R.drawable.pokemon_type_icon_electric to "Eletric",
+            R.drawable.pokemon_type_icon_bug to "Bug",
+            R.drawable.pokemon_type_icon_grass to "Grass",
+        ),
+        weaknesses = listOf(
+            R.drawable.pokemon_type_icon_electric to "Eletric",
+            R.drawable.pokemon_type_icon_bug to "Bug",
+            R.drawable.pokemon_type_icon_grass to "Grass",
+            R.drawable.pokemon_type_icon_bug to "Bug",
+            R.drawable.pokemon_type_icon_grass to "Grass",
+        )
+    )
+
     val detailVo = PokemonDetailVo(
-        "#0025",
+        "0025",
         "Pikachu",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png",
+        R.drawable.backgroud_detail_1,
         listOf(
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
         ),
-        stats
+        spec,
+        stats,
     )
     PokemonDetail(detailVo)
 }

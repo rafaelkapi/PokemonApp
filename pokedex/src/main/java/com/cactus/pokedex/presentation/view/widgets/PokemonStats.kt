@@ -58,8 +58,8 @@ fun PokemonStats(modifier: Modifier,stats: PokemonStatsVo) {
                         bottomStart = 10.dp,
                     )
                 )
-                .alpha(.3f)
-                .background(Color.Black)
+                .alpha(.4f)
+                .background(Color(ColorAccent.value))
         )
 
         Row(modifier = Modifier
@@ -128,7 +128,7 @@ fun BarChart(modifier: Modifier, range: Pair<String, Float>, specialRange: Float
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally)
             ,
-            text = range.first, color = Color(0xFF49494B), style = TextStyle(
+            text = range.first, color = Color(0xFF2D2D2E), style = TextStyle(
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
@@ -153,7 +153,7 @@ fun BarChart(modifier: Modifier, range: Pair<String, Float>, specialRange: Float
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentWidth(Alignment.CenterHorizontally),
-                text = text, color = Color(0xFF6D6D6F), style = TextStyle(
+                text = text, color = Color(0xFF5B5B5C), style = TextStyle(
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,

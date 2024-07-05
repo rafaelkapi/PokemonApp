@@ -21,6 +21,7 @@ import com.cactus.movie.R
 import com.cactus.movie.databinding.FragmentLayoutBinding
 import com.cactus.pokedex.presentation.adapter.PokemonAdapter
 import com.cactus.pokedex.presentation.model.PokemonDetailVo
+import com.cactus.pokedex.presentation.model.PokemonSpecVo
 import com.cactus.pokedex.presentation.model.PokemonStatsVo
 import com.cactus.pokedex.presentation.model.PokemonType
 import com.cactus.pokedex.presentation.model.PokemonVo
@@ -220,16 +221,36 @@ class PokedexFragment : BaseMvvmFragment() {
         speed = "Speed" to 0.5f
     )
 
+    val spec = PokemonSpecVo(
+        height = "0.4m",
+        weight = "6.0kg",
+        category = "Seed",
+        type = listOf(
+            R.drawable.pokemon_type_icon_electric to "Eletric",
+            R.drawable.pokemon_type_icon_bug to "Bug",
+            R.drawable.pokemon_type_icon_grass to "Grass",
+        ),
+        weaknesses = listOf(
+            R.drawable.pokemon_type_icon_electric to "Eletric",
+            R.drawable.pokemon_type_icon_bug to "Bug",
+            R.drawable.pokemon_type_icon_grass to "Grass",
+            R.drawable.pokemon_type_icon_bug to "Bug",
+            R.drawable.pokemon_type_icon_grass to "Grass",
+        )
+    )
+
     val detailVo = PokemonDetailVo(
-        "#0025",
+        "0025",
         "Pikachu",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png",
+        R.drawable.backgroud_detail_1,
         listOf(
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
         ),
-        stats
+        spec,
+        stats,
     )
 
     override fun onCreateView(
@@ -257,7 +278,7 @@ class PokedexFragment : BaseMvvmFragment() {
     @Composable
     fun Greeting(name: String, modifier: Modifier = Modifier) {
         Text(
-            text = "Funfando no fragment carai",
+            text = "Funfando",
             modifier = modifier
         )
     }
