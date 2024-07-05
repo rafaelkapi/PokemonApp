@@ -59,11 +59,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-//    implementation("androidx.compose.ui:ui:1.6.8")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
     implementation(libs.runtime)
-//    implementation(libs.androidx.runtime.livedata)
-//    implementation(libs.androidx.runtime.rxjava2)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.runtime.rxjava2)
 
 
 

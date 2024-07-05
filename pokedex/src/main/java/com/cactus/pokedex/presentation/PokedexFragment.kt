@@ -20,6 +20,8 @@ import com.cactus.commons.viewbinding.viewBinding
 import com.cactus.movie.R
 import com.cactus.movie.databinding.FragmentLayoutBinding
 import com.cactus.pokedex.presentation.adapter.PokemonAdapter
+import com.cactus.pokedex.presentation.model.PokemonDetailVo
+import com.cactus.pokedex.presentation.model.PokemonStatsVo
 import com.cactus.pokedex.presentation.model.PokemonType
 import com.cactus.pokedex.presentation.model.PokemonVo
 import com.cactus.pokedex.presentation.view.ContainerPokedex
@@ -209,6 +211,27 @@ class PokedexFragment : BaseMvvmFragment() {
         ),
     )
 
+    val stats = PokemonStatsVo(
+        hp = "HP" to 0.3f,
+        attack = "Attack" to 0.55f,
+        defense = "Defense" to 0.7f,
+        specialAttack = 0.7f,
+        specialDefense = 0.8f,
+        speed = "Speed" to 0.5f
+    )
+
+    val detailVo = PokemonDetailVo(
+        "#0025",
+        "Pikachu",
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png",
+        listOf(
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+        ),
+        stats
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ) = ComposeView(requireContext()).apply {
@@ -217,7 +240,7 @@ class PokedexFragment : BaseMvvmFragment() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    PokemonDetail(listPokemonsState.value[0])
+                    PokemonDetail(detailVo)
                     ContainerPokedex(pokedexBinding, listPokemonsState)
                 }
             }

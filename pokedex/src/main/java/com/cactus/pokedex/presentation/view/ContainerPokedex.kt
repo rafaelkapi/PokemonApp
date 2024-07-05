@@ -8,7 +8,10 @@ import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DrawerValue
 import androidx.compose.runtime.Composable
@@ -62,6 +65,7 @@ fun ContainerPokedex(
     Box(
         modifier = Modifier
             .fillMaxSize()
+
             .onGloballyPositioned { coordinates ->
                 drawerWidth = coordinates.size.width.toFloat()
                 positionTop = coordinates.positionInRoot().y
@@ -70,7 +74,7 @@ fun ContainerPokedex(
                 val offset = state.offset
                 if (offset >= 0f) {
                     this.translationX = offset
-                    this.translationY = offset * 1.4f
+                    this.translationY = offset * 1.5f
                     val scale = lerp(1f, 0.8f, offset / drawerWidth)
                     this.scaleX = scale
                     this.scaleY = scale
