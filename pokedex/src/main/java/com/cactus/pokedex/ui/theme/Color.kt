@@ -2,7 +2,7 @@ package com.cactus.pokedex.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val ColorAccent = Color(0xFF646568)
+val ColorAccent = Color(0xFF8D8D8F)
 val PrimaryColor = Color(0xFFF3F1ED)
 val Pink80 = Color(0xFFEFB8C8)
 

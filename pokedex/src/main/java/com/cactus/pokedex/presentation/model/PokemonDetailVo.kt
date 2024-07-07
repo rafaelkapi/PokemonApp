@@ -5,10 +5,15 @@ data class PokemonDetailVo(
     val name: String,
     val posterUrl: String,
     val drawableBackground: Int,
-    val evolutionsThumbnails: List<String>,
+    val evolutionsThumbnails: List<EvolutionVo>,
 
     val spec: PokemonSpecVo,
     val stats: PokemonStatsVo,
+)
+
+data class EvolutionVo(
+    val id: String,
+    val posterUrl: String,
 )
 
 data class PokemonStatsVo(

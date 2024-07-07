@@ -1,6 +1,7 @@
 package com.cactus.pokedex.presentation.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.cactus.movie.R
+import com.cactus.pokedex.presentation.model.EvolutionVo
 import com.cactus.pokedex.presentation.model.PokemonDetailVo
 import com.cactus.pokedex.presentation.model.PokemonSpecVo
 import com.cactus.pokedex.presentation.model.PokemonStatsVo
@@ -25,6 +28,7 @@ import com.cactus.pokedex.presentation.view.widgets.PokemonEvolution
 import com.cactus.pokedex.presentation.view.widgets.PokemonImage
 import com.cactus.pokedex.presentation.view.widgets.PokemonSpec
 import com.cactus.pokedex.presentation.view.widgets.PokemonStats
+import com.cactus.pokedex.ui.theme.PrimaryColor
 
 @Composable
 fun PokemonDetail(detailVo: PokemonDetailVo) {
@@ -35,6 +39,7 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
         modifier = Modifier
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.navigationBars)
+            .background(Color(PrimaryColor.value))
     ) {
         val (pokemonImage, pokemonEvolution, pokemonSpec, pokemonStats) = createRefs()
 
@@ -44,9 +49,7 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             },
-            "${detailVo.name}  #${detailVo.id}",
-            detailVo.posterUrl,
-            detailVo.drawableBackground
+            detailVo
         )
 
         Image(
@@ -67,13 +70,13 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
                     end.linkTo(parent.end)
                 }
                 .offset(y = -10.dp),
-            detailVo.evolutionsThumbnails,
+            detailVo,
         )
 
         PokemonSpec(
             Modifier
                 .fillMaxWidth(0.7f)
-                .padding(start = 4.dp, bottom = 4.dp, end = 4.dp, top = 8.dp)
+                .padding(start = 4.dp, end = 4.dp, top = 2.dp)
                 .constrainAs(pokemonSpec) {
                     top.linkTo(pokemonEvolution.bottom)
                     bottom.linkTo(pokemonStats.top)
@@ -133,9 +136,18 @@ fun PokemonDetailPreview() {
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png",
         R.drawable.backgroud_detail_1,
         listOf(
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+            EvolutionVo(
+                "0172",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
+            ),
+            EvolutionVo(
+                "0025",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+            ),
+            EvolutionVo(
+                "0026",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+            ),
         ),
         spec,
         stats,

@@ -20,6 +20,7 @@ import com.cactus.commons.viewbinding.viewBinding
 import com.cactus.movie.R
 import com.cactus.movie.databinding.FragmentLayoutBinding
 import com.cactus.pokedex.presentation.adapter.PokemonAdapter
+import com.cactus.pokedex.presentation.model.EvolutionVo
 import com.cactus.pokedex.presentation.model.PokemonDetailVo
 import com.cactus.pokedex.presentation.model.PokemonSpecVo
 import com.cactus.pokedex.presentation.model.PokemonStatsVo
@@ -245,9 +246,18 @@ class PokedexFragment : BaseMvvmFragment() {
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png",
         R.drawable.backgroud_detail_1,
         listOf(
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+            EvolutionVo(
+                "0172",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
+            ),
+            EvolutionVo(
+                "0025",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+            ),
+            EvolutionVo(
+                "0026",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+            ),
         ),
         spec,
         stats,

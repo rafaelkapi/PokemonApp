@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,9 +30,11 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
 import com.cactus.movie.R
+import com.cactus.pokedex.presentation.model.EvolutionVo
+import com.cactus.pokedex.presentation.model.PokemonDetailVo
 
 @Composable
-fun PokemonEvolution(modifier: Modifier, evolutionsThumbnails : List<String>) {
+fun PokemonEvolution(modifier: Modifier, detailVo: PokemonDetailVo) {
     ConstraintLayout(modifier = modifier) {
         val (title, background, spacer) = createRefs()
 
@@ -104,19 +107,11 @@ fun PokemonEvolution(modifier: Modifier, evolutionsThumbnails : List<String>) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
-            val borderWidth = 3.dp
             val borderColor = Color(0xA9FFFFFF)
-            val fillMaxHeightThumbnailsEvolution = 0.6f
             val arrowFillMaxHeight = 0.2f
 
-            AsyncImage(
-                model = evolutionsThumbnails.get(0),
-                contentDescription = null,
-                modifier = Modifier
-                    .alpha(.9f)
-                    .fillMaxHeight(fillMaxHeightThumbnailsEvolution)
-                    .padding(borderWidth)
-            )
+            PosterThumbnail(detailVo.evolutionsThumbnails.get(0))
+
             Image(
                 painter = painterResource(id = R.drawable.arrow_evolution),
                 contentDescription = null,
@@ -124,14 +119,9 @@ fun PokemonEvolution(modifier: Modifier, evolutionsThumbnails : List<String>) {
                     .fillMaxHeight(arrowFillMaxHeight),
                 colorFilter = ColorFilter.tint(borderColor)
             )
-            AsyncImage(
-                model = evolutionsThumbnails.get(1),
-                contentDescription = null,
-                modifier = Modifier
-                    .alpha(.9f)
-                    .fillMaxHeight(fillMaxHeightThumbnailsEvolution)
-                    .padding(borderWidth)
-            )
+
+            PosterThumbnail(detailVo.evolutionsThumbnails.get(1))
+
             Image(
                 painter = painterResource(id = R.drawable.arrow_evolution),
                 contentDescription = null,
@@ -139,15 +129,41 @@ fun PokemonEvolution(modifier: Modifier, evolutionsThumbnails : List<String>) {
                     .fillMaxHeight(arrowFillMaxHeight),
                 colorFilter = ColorFilter.tint(borderColor),
             )
+
+            PosterThumbnail(detailVo.evolutionsThumbnails.get(2))
+        }
+    }
+}
+
+@Composable
+fun PosterThumbnail(vo: EvolutionVo) {
+    val borderWidth = 3.dp
+    val fillMaxHeightThumbnailsEvolution = 0.6f
+
+    with(vo) {
+        Column {
             AsyncImage(
-                model = evolutionsThumbnails.get(2),
+                model = posterUrl,
                 contentDescription = null,
                 modifier = Modifier
                     .alpha(.9f)
                     .fillMaxHeight(fillMaxHeightThumbnailsEvolution)
                     .padding(borderWidth)
             )
+            Text(
+                modifier = Modifier
+                    .padding(
+                        start = 10.dp
+                    )
+                    .alpha(.7f),
+                text = "#$id", color = Color.White, style = TextStyle(
+                    fontFamily = FontFamily.Default,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    lineHeight = 14.sp,
+                    letterSpacing = 0.sp
+                )
+            )
         }
-
     }
 }

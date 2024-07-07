@@ -20,18 +20,22 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.cactus.movie.R
+import com.cactus.pokedex.presentation.model.PokemonDetailVo
 import com.cactus.pokedex.ui.theme.ColorAccent
 import com.cactus.pokedex.ui.theme.PrimaryColor
 
 @Composable
-fun PokemonImage(modifier: Modifier, name: String, imageUrl: String, drawableBackground : Int) {
+fun PokemonImage(modifier: Modifier, vo : PokemonDetailVo) {
     val gradient = Brush.verticalGradient(
         colors = listOf(
             Color(ColorAccent.value),
@@ -50,7 +54,7 @@ fun PokemonImage(modifier: Modifier, name: String, imageUrl: String, drawableBac
             val imageShadowHeight = 40.dp
 
             Image(
-                painter = painterResource(id = drawableBackground),
+                painter = painterResource(id = vo.drawableBackground),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -71,23 +75,35 @@ fun PokemonImage(modifier: Modifier, name: String, imageUrl: String, drawableBac
             )
         }
 
+        val text = buildAnnotatedString {
+            append(vo.name)
+            withStyle(style = SpanStyle(
+                color = Color(0xFFD1D1D1),
+                fontSize = 16.sp,
+                )
+            ) {
+                append(" #${vo.id}")
+            }
+
+        }
+
         Text(
-            text = name,
+            text = text,
             color = Color(PrimaryColor.value),
             style = TextStyle(
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                lineHeight = 20.sp,
+                fontSize = 32.sp,
+                lineHeight = 32.sp,
                 letterSpacing = 0.sp
             ),
             modifier = Modifier
                 .align(Alignment.BottomStart)
-            .offset(y= -45.dp, x = 10.dp)
+            .offset(y= -40.dp, x = 10.dp)
         )
 
         AsyncImage(
-            model = imageUrl,
+            model = vo.posterUrl,
             contentDescription = null,
             contentScale = ContentScale.Inside,
             modifier = Modifier
@@ -95,7 +111,5 @@ fun PokemonImage(modifier: Modifier, name: String, imageUrl: String, drawableBac
                 .aspectRatio(14f / 9f)
                 .alpha(0.9f),
         )
-
-
     }
 }

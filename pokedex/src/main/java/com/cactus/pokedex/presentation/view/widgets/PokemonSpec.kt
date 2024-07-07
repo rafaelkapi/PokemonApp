@@ -109,8 +109,13 @@ fun HeaderSpec(spec: PokemonSpecVo) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceAround,
+                .padding(
+                    top = 8.dp,
+                    start = 8.dp,
+                    end = 8.dp,
+                )
+            ,
+            horizontalArrangement = Arrangement.Absolute.SpaceAround,
         ) {
             Text(
                 text = spec.height, color = Color(0xFF49494B), style = TextStyle(
@@ -198,7 +203,7 @@ fun TypeTag(modifier: Modifier = Modifier, type: String, icon: Int) {
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .height(14.dp)
+                    .height(16.dp)
                     .padding(start = 5.dp)
                     .aspectRatio(1f / 1f)
             )
@@ -213,8 +218,8 @@ fun TypeTag(modifier: Modifier = Modifier, type: String, icon: Int) {
                 text = type, color = Color.White, style = TextStyle(
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 12.sp,
-                    lineHeight = 12.sp,
+                    fontSize = 14.sp,
+                    lineHeight = 14.sp,
                     letterSpacing = 0.sp
                 )
             )
