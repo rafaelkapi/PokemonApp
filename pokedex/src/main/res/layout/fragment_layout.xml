@@ -1,0 +1,18 @@
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewSelector"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    <include-->
+<!--        android:id="@+id/skeleton"-->
+<!--        layout="@layout/container_details_skeleton" />-->
+
+    <include
+        android:id="@+id/content"
+        layout="@layout/pokedex_layout" />
+
+<!--    <include-->
+<!--        android:id="@+id/error"-->
+<!--        layout="@layout/container_details_error" />-->
+
+</ViewFlipper>
