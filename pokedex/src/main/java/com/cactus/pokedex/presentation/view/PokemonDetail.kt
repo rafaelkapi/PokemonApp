@@ -2,6 +2,7 @@ package com.cactus.pokedex.presentation.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -99,6 +100,10 @@ fun PokemonDetail(detailVo: PokemonDetailVo) {
     }
 }
 
+
+
+
+
 @Preview(showBackground = true)
 @Composable
 fun PokemonDetailPreview() {
@@ -152,5 +157,9 @@ fun PokemonDetailPreview() {
         spec,
         stats,
     )
-    PokemonDetail(detailVo)
+    Box {
+        PokemonDetail(detailVo)
+//        TransitionView(ViewState.Success(Unit))
+    }
+
 }

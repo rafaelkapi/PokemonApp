@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cactus.commons.base.BaseMvvmFragment
+import com.cactus.commons.livedata.ViewState
 import com.cactus.commons.viewbinding.viewBinding
 import com.cactus.movie.R
 import com.cactus.movie.databinding.FragmentLayoutBinding
@@ -28,15 +30,17 @@ import com.cactus.pokedex.presentation.model.PokemonType
 import com.cactus.pokedex.presentation.model.PokemonVo
 import com.cactus.pokedex.presentation.view.ContainerPokedex
 import com.cactus.pokedex.presentation.view.PokemonDetail
+import com.cactus.pokedex.presentation.view.TransitionView
+import kotlinx.coroutines.delay
 
 class PokedexFragment : BaseMvvmFragment() {
 
     private val pokedexBinding by viewBinding(FragmentLayoutBinding::inflate)
 
-    private val pokemonAdapter: PokemonAdapter by lazy { PokemonAdapter{} }
+    private val pokemonAdapter: PokemonAdapter by lazy { PokemonAdapter {} }
 
 
-    var listPokemons =  listOf(
+    var listPokemons = listOf(
         PokemonVo(
             "#0025",
             "Pikachu",
@@ -266,16 +270,18 @@ class PokedexFragment : BaseMvvmFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ) = ComposeView(requireContext()).apply {
-            setContent {
-                val listPokemonsState = remember { mutableStateOf(listPokemons) }
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    PokemonDetail(detailVo)
-                    ContainerPokedex(pokedexBinding, listPokemonsState)
-                }
+        setContent {
+            val listPokemonsState = remember { mutableStateOf(listPokemons) }
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                PokemonDetail(detailVo)
+                ContainerPokedex(pokedexBinding, listPokemonsState)
+//                TransitionView(ViewState.ErrorValue("We are experiencing instabilities.\nPlease try again"))
+                TransitionView(ViewState.Loading)
             }
         }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
